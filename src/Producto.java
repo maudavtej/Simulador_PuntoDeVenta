@@ -13,4 +13,16 @@ public abstract class Producto {
     }
 
     public abstract double calcularPrecioFinal();
+
+    public void reducirStock(int cant){
+        if(this.stock>0){
+            this.stock-=cant;
+        }
+    }
+
+    public void aumentarStock(int cant){
+        if(this.stock>=0){
+            this.stock+=cant;
+        }
+    }
 }
