@@ -19,4 +19,10 @@ public abstract class Producto {
             this.stock-=cant;
         }
     }
+
+    public void aumentarStock(int cant){
+        if(this.stock>=0){
+            this.stock+=cant;
+        }
+    }
 }
