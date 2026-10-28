@@ -12,7 +12,7 @@ public class ProductoPerecedero extends ProductoFisico{
     public Date getCaducidad(){return caducidad;}
     @Override
     public double calcularPrecioFinal(){
-        return precioBase*stock;
+        return precioBase*IVA;
     }
 
 }
