@@ -1,5 +1,9 @@
 .idea/
 *.iml
 out/
+<<<<<<< HEAD
 target/
 .DS_Store
+=======
+target/.DS_Store
+>>>>>>> 6adc7ae (Ignorar .DS_Store)
