@@ -1,5 +1,5 @@
 public abstract class Producto {
-
+    public static final double IVA=0.16;
     protected String codigo;
     protected String nombre;
     protected float precioBase;
