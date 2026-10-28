@@ -1,4 +1,4 @@
-public enum MetodoPago {
+public enum Metodopago {
     EFECTIVO,
     TARJETA,
     TRANSFERENCIA

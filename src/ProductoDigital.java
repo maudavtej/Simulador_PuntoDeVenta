@@ -10,6 +10,6 @@ public class ProductoDigital extends Producto{
     }
     @Override
     public double calcularPrecioFinal(){
-        return (precioBase*IVA);
+        return precioBase*IVA;
     }
 }
