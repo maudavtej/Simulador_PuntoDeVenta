@@ -3,7 +3,7 @@ public class Venta {
     private String fecha;
     private String nombreCliente;
     private double descuento;
-    private MetodoPago metodoPago;
+    private Metodopago metodoPago;
     private double montoPagado;
     private boolean pagada;
 
