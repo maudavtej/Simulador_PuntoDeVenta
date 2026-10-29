@@ -1,7 +1,8 @@
-import java.time.LocalDate;
-import java.util.Date;
+package backend;
 
-public class ProductoPerecedero extends ProductoFisico{
+import java.time.LocalDate;
+
+public class ProductoPerecedero extends ProductoFisico {
     //=============================================================================
     //ATRIBUTOS PROPIOS
     private LocalDate caducidad;
@@ -9,7 +10,7 @@ public class ProductoPerecedero extends ProductoFisico{
 //CONSTRUCTOR
     public ProductoPerecedero(String codigo, String nombre, float precioBase, int stock, double peso, LocalDate caducidad){
         super(codigo,nombre,precioBase,stock, peso);
-        this.caducidad=caducidad;
+        setCaducidad(caducidad);
         setPeso(peso);//ASIGNAMOS Y VALIDAMOS AL MISMO TIEMPO
     }
 //===============================================================================================
