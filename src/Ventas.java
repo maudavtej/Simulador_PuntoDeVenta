@@ -22,7 +22,6 @@ public class Ventas {
         return idVenta;
     }
 
-<<<<<<< HEAD:src/Ventas.java
     public Date getFecha() {
         return fecha;
     }
@@ -43,6 +42,4 @@ public class Ventas {
         return pagada;
     }
 }
-=======
-}
->>>>>>> main:src/Venta.java
+
