@@ -1,4 +1,6 @@
-public class ProductoDigital extends Producto{
+package backend;
+
+public class ProductoDigital extends Producto {
     //ATRIBUTOS
     private String claveLicencia;
     public static final int []MESES_GARANTIA={1,3,6,9,12};
