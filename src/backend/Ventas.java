@@ -1,3 +1,5 @@
+package backend;
+
 import java.util.Date;
 
 public class Ventas {
@@ -8,7 +10,7 @@ public class Ventas {
     private double montoPagado;
     private boolean pagada;
 
-    public Ventas(){}
+    private Ventas(){}
     public Ventas(int idVenta, Date fecha, double descuento, Metodopago metodoPago, double montoPagado, boolean pagada ) {
         this.idVenta = idVenta;
         this.fecha= fecha;

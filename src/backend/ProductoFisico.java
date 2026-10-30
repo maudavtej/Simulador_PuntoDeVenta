@@ -1,4 +1,6 @@
-public class ProductoFisico extends Producto{
+package backend;
+
+public class ProductoFisico extends Producto {
     //============================================
     //ATRIBUTOS PROPIOS
     private double peso=0;
@@ -6,7 +8,7 @@ public class ProductoFisico extends Producto{
     //CONSTRUCTOR
     public ProductoFisico(String codigo, String nombre, float precioBase, int stock,double peso){
         super(codigo,nombre,precioBase,stock);
-        this.peso=peso;
+        setPeso(peso);
     }
     //=============================================
     //SETTERS Y GETTERS

@@ -1,3 +1,5 @@
+package backend;
+
 public abstract class Producto {
     public static final double IVA=1.16;
     protected String codigo;
@@ -5,7 +7,7 @@ public abstract class Producto {
     protected float precioBase;
     protected int stock;
 
-    public Producto(){}
+    private Producto(){}
     public Producto(String codigo,String nombre, float precioBase, int stock){
         this.codigo = codigo;
         this.nombre = nombre;
@@ -18,6 +20,8 @@ public abstract class Producto {
     }
 
     public void setCodigo(String codigo) {
+        if (!Regexp.isCodigo(codigo)){throw new IllegalArgumentException("Código inválido");
+        }
         this.codigo = codigo;
     }
 
@@ -30,7 +34,10 @@ public abstract class Producto {
     }
 
     public float getPrecioBase() {
-        return precioBase;
+        if (precioBase<=0){
+            throw new IllegalArgumentException("Ingrese un precio base válido");
+        }
+        return this.precioBase=precioBase;
     }
 
     public void setPrecioBase(float precioBase) {
