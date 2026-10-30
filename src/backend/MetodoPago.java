@@ -1,6 +1,6 @@
 package backend;
 
-public enum Metodopago {
+public enum MetodoPago {
     EFECTIVO,
     TARJETA,
     TRANSFERENCIA
