@@ -6,13 +6,15 @@ public abstract class Producto {
     protected String nombre;
     protected float precioBase;
     protected int stock;
+    protected double descuento;
 
     private Producto(){}
-    public Producto(String codigo,String nombre, float precioBase, int stock){
+    public Producto(String codigo,String nombre, float precioBase, int stock, double descuento){
         this.codigo = codigo;
         this.nombre = nombre;
         this.precioBase = precioBase;
         this.stock = stock;
+        this.descuento=descuento;
     }
 
     public String getCodigo() {
@@ -51,6 +53,11 @@ public abstract class Producto {
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+    public void setDescuento(double descuento){
+        this.descuento=descuento;
+    }
+    public double getDescuento(){return descuento;}
 
     public abstract double calcularPrecioFinal();
 }

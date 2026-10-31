@@ -8,7 +8,7 @@ public class ProductoDigital extends Producto {
     //=============================================================================================
     //CONSTRUCTOR
     public ProductoDigital(String codigo, String nombre, float precioBase, int stock, String claveLicencia, int mesesGarantia){
-        super(codigo,nombre,precioBase,stock);
+        super(codigo,nombre,precioBase,stock,0);
         this.claveLicencia=claveLicencia;
         setMesesGarantia(mesesGarantia);
     }
