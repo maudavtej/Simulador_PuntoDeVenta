@@ -1,5 +1,8 @@
 package backend;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 public class Regexp {
     //=============================================================================
     //VALIDAMOS QUE EL CÓDIGO SEAN SOLO NÚMEROS
@@ -30,6 +33,26 @@ public class Regexp {
         if (nombreP==null||nombreP.trim().isEmpty())return false;
         String regex = "^[A-Za-zÁÉÍÓÚáéíóúñÑ\\s]+$";
         return nombreP.trim().matches(regex);
+    }
+
+    //VALIDA NUMEROS
+
+    public static boolean numerosValidos(int id){
+        String idStr = Integer.toString(id);
+        if (idStr==null||idStr.trim().isEmpty())return false;
+        String regexp = "^[0-9]{5}$";
+        return idStr.matches(regexp);
+    }
+    //VALIDA FECHA
+
+    public static boolean fechaValida(String fecha) {
+        if (fecha == null) return false;
+        try {
+            LocalDate.parse(fecha.trim());
+            return true;
+        } catch (DateTimeException e) {
+            return false;
+        }
     }
 
 
