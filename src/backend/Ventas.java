@@ -9,7 +9,7 @@ public class Ventas {
     private double descuento;
     private Metodopago metodoPago;
     private double montoPagado;
-    private boolean pagada;
+    private boolean pagada=false;
     private final Producto producto;
 
     public Ventas(int idVenta, LocalDate fecha, double descuento, Metodopago metodoPago, double montoPagado, boolean pagada, Producto producto) {
@@ -17,7 +17,7 @@ public class Ventas {
         this.producto=producto;
         setIdVenta(idVenta);
         this.fecha= fecha;
-        this.descuento = descuento;
+        setDescuento(descuento);
         this.metodoPago=metodoPago;
         this.pagada = pagada;
         this.montoPagado=montoPagado;
@@ -52,11 +52,16 @@ public class Ventas {
     }
 
     public void setFecha(LocalDate fecha) {
+        String fechaStr = fecha.toString();
+        if (!Regexp.fechaValida(fechaStr)){
+            throw new IllegalArgumentException("Fecha inválida");
+        }
         this.fecha = fecha;
     }
 
     public void setDescuento(double descuento) {
-        this.descuento = producto.getDescuento();
+
+        this.descuento = Regexp.descuentoV(descuento);
     }
 
     public void setMetodoPago(Metodopago metodoPago) {
@@ -68,7 +73,10 @@ public class Ventas {
     }
 
     public void setPagada(boolean pagada) {
-        this.pagada = pagada;
+        if (montoPagado>=producto.calcularPrecioFinal()){
+            pagada=true;
+        }
+        this.pagada=pagada;
     }
 
     public boolean isPagada() {

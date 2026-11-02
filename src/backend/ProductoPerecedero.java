@@ -27,7 +27,7 @@ public class ProductoPerecedero extends ProductoFisico {
 //FUNCION PROPIA y FUNCIONES
     @Override
     public double calcularPrecioFinal(){
-        return precioBase*getPeso()*IVA;
+        return (precioBase*getPeso()*IVA)-descuento;
     }
 
     @Override
