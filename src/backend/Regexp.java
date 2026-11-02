@@ -16,7 +16,7 @@ public class Regexp {
 
     //================================================================================
     //VALIDACIÓN DE CANTIDADES
-    public static boolean isNumber(String precioBase){
+    public static boolean precioValido(String precioBase){
         if (precioBase==null||precioBase.trim().isEmpty())return false;
         try {
             float precioB =Float.parseFloat(precioBase.trim());
@@ -24,14 +24,13 @@ public class Regexp {
         }catch (NumberFormatException e){
             return false;
         }
-
     }
 
     //==================================================================================
     //VALIDA NOMBRE DE PRODUCTO
     public static boolean validaNombres(String nombreP){
         if (nombreP==null||nombreP.trim().isEmpty())return false;
-        String regex = "^[A-Za-zÁÉÍÓÚáéíóúñÑ\\s]+$";
+        String regex = "^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9 .,\\ -]+$";
         return nombreP.trim().matches(regex);
     }
 
@@ -53,6 +52,14 @@ public class Regexp {
         } catch (DateTimeException e) {
             return false;
         }
+    }
+    //DESCUENTO
+
+    public static double descuentoV(double descuento){
+        if (descuento<0||descuento>1){
+            throw new IllegalArgumentException("Descuento inválido");
+        }
+        return descuento;
     }
 
 

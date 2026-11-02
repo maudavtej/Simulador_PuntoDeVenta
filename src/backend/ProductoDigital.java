@@ -34,6 +34,6 @@ public class ProductoDigital extends Producto {
     //CÁLCULO DE SU PRECIO FINAL PROPIO
     @Override
     public double calcularPrecioFinal(){
-        return precioBase*IVA;
+        return (precioBase*IVA)-descuento;
     }
 }
