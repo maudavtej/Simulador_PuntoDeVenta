@@ -6,50 +6,73 @@ import java.awt.*;
 
 public class PanelMenu extends JPanel {
     private JLabel lbMenu;
-    private JComboBox<String> cbProductos;
     //BOTONES
     private JButton btnAddProducto;
+    private JButton btnBuscarProducto;
+    private JButton btnVentas;
 
     //CONSTANTES
     private final static String REGISTRAR_PRODUCTO="AGREGAR NUEVO PRODUCTO";
-
-
+    private final static  String BUSCAR_PRODUCTO="BUSCAR PRODUCTO";
+    private final static String CONSULTAR_VENTAS="VENTAS";
     //CONSTRUCTOR
-
     public PanelMenu(){
-        setLayout(null);
-        setPreferredSize(new Dimension(150,0));
+        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
+        setPreferredSize(new Dimension(165,0));
         setBackground(new Color(15, 23, 42));
-
-
-
         //ETIQUETAS
-
+        //MENÚ
         lbMenu = new JLabel("MENÚ");
-        lbMenu.setFont(new Font("Arial",Font.BOLD,14));
+        lbMenu.setFont(new Font("Arial",Font.BOLD,20));
         lbMenu.setForeground(Color.white);
-
-        //LISTAS DESPLEGABLES
-
-        cbProductos=new JComboBox<>();
-        cbProductos.addItem("Producto físico");
-        cbProductos.addItem("Producto perecedero");
-        cbProductos.addItem("Producto digital");
-
+        lbMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
+//======================================================================
         //BOTONES
 
-        btnAddProducto=new JButton("PRODUCTOS");
+        btnAddProducto=new JButton("REGISTRAR PRODUCTO");
         btnAddProducto.setActionCommand(REGISTRAR_PRODUCTO);
-        //POSICIONES
-
-        lbMenu.setBounds(50,10,50,20);
-        //cbProductos.setBounds(25, 50,100,20);
-        btnAddProducto.setBounds(7,80,140,50);
-
-        //
-        add(lbMenu, BorderLayout.CENTER);
-        //add(cbProductos);
+        btnAddProducto.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAddProducto.setMaximumSize(new Dimension(160, 40));
+        btnAddProducto.setMinimumSize(new Dimension(160, 40));
+        btnAddProducto.setPreferredSize(new Dimension(160, 40));
+        btnAddProducto.setFont(new Font("Arial", Font.BOLD, 10));
+        //======================================================
+        btnBuscarProducto = new JButton("BUSCAR PRODUCTO");
+        btnBuscarProducto.setActionCommand(BUSCAR_PRODUCTO);
+        btnBuscarProducto.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnBuscarProducto.setMaximumSize(new Dimension(160, 40));
+        btnBuscarProducto.setMinimumSize(new Dimension(160, 40));
+        btnBuscarProducto.setPreferredSize(new Dimension(160, 40));
+        btnBuscarProducto.setFont(new Font("Arial", Font.BOLD, 10));
+    //================================================================
+        btnVentas = new JButton("VENTAS");
+        btnVentas.setActionCommand(CONSULTAR_VENTAS);
+        btnVentas.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnVentas.setMaximumSize(new Dimension(160, 40));
+        btnVentas.setMinimumSize(new Dimension(160, 40));
+        btnVentas.setPreferredSize(new Dimension(160, 40));
+        btnVentas.setFont(new Font("Arial", Font.BOLD, 10));
+        //===================================================
+        //ESPACIOS ENTRE BOTONES
+        add(lbMenu);
+        add(Box.createRigidArea(new Dimension(0, 50)));
         add(btnAddProducto);
+        add(Box.createRigidArea(new Dimension(0, 20)));
+        add(btnBuscarProducto);
+        add(Box.createRigidArea(new Dimension(0,20)));
+        add(btnVentas);
+        add(Box.createVerticalGlue());
+    }
+    public JButton getBtnAddProducto(){
+        return btnAddProducto;
+    }
 
+    public JButton getBtnBuscarProducto(){
+        return btnBuscarProducto;
+    }
+
+    public JButton getBtnVentas(){
+        return btnVentas;
     }
 }

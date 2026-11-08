@@ -1,17 +1,17 @@
 package frontend;
 
+import backend.Inventario;
+
 import java.awt.*;
 import javax.swing.*;
 
 public class InterfazAplicacion extends JFrame{
-
-    private CardLayout panelMixt;
-    private JPanel principal;
+    private final Inventario inventario= new Inventario();
 
     public InterfazAplicacion() {
         //Forma
         setTitle("Punto venta");
-        setSize(550, 500);
+        setSize(700, 550);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -19,9 +19,11 @@ public class InterfazAplicacion extends JFrame{
 
         PanelMenu menu = new PanelMenu();
         add(menu, BorderLayout.WEST);
+
         PanelEncabezado encabezado = new PanelEncabezado();
         add(encabezado, BorderLayout.NORTH);
-        PanelContenido contenido = new PanelContenido();
+
+        PanelContenido contenido = new PanelContenido(inventario);
         add(contenido, BorderLayout.CENTER);
     }
 

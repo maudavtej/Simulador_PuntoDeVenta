@@ -15,8 +15,8 @@ public class PanelEncabezado extends JPanel {
         Border padding = BorderFactory.createEmptyBorder(0, 25, 0, 20);
         setBorder(BorderFactory.createCompoundBorder(bordeInferior, padding));
         //Titulo
-        lbTitulo=new JLabel("INVENTARIO");
-        lbTitulo.setFont(new Font("Segoe UI", Font.BOLD,35));
+        lbTitulo=new JLabel("SISTEMA DE INVENTARIOS");
+        lbTitulo.setFont(new Font("Segoe UI", Font.BOLD,25));
         lbTitulo.setForeground(Color.white);
         lbTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         add(lbTitulo, BorderLayout.CENTER);
