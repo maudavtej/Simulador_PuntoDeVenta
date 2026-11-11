@@ -1,7 +1,9 @@
 package backend;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Ventas {
     private int idVenta;
@@ -9,78 +11,114 @@ public class Ventas {
     private double descuento;
     private Metodopago metodoPago;
     private double montoPagado;
-    private boolean pagada=false;
-    private final Producto producto;
+    private boolean pagada;
+    private final List<LineaVenta> lineas = new ArrayList<>();
 
-    public Ventas(int idVenta, LocalDate fecha, double descuento, Metodopago metodoPago, double montoPagado, boolean pagada, Producto producto) {
-        if (producto==null) throw new IllegalArgumentException("Producto requerido");
-        this.producto=producto;
+    public Ventas(int idVenta, LocalDate fecha, double descuento,
+            Metodopago metodoPago) {
         setIdVenta(idVenta);
-        this.fecha= fecha;
+        setFecha(fecha);
         setDescuento(descuento);
-        this.metodoPago=metodoPago;
-        this.pagada = pagada;
-        this.montoPagado=montoPagado;
+        if (metodoPago == null) {
+            throw new IllegalArgumentException("Método de pago requerido");
+        }
+        this.metodoPago = metodoPago;
+        this.montoPagado = 0;
+        this.pagada = false;
     }
 
-    //GETTERS
-    public int getIdVenta() {return idVenta;}
-
-    public LocalDate getFecha() {
-        return fecha;
+    // ===============================================================
+    // LÍNEAS
+    public void agregarLinea(Producto producto, int cantidad) {
+        // Si el producto ya está en la venta, aumenta el stock
+        for (LineaVenta lv : lineas) {
+            if (lv.getProducto().getCodigo().equals(producto.getCodigo())) {
+                lv.setCantidad(lv.getCantidad() + cantidad);
+                return;
+            }
+        }
+        lineas.add(new LineaVenta(producto, cantidad));
     }
 
-    public double getDescuento() {
-        return descuento;
+    public void eliminarLinea(String codigoProducto) {
+        lineas.removeIf(lv -> lv.getProducto().getCodigo().equals(codigoProducto));
     }
 
-    public Metodopago getMetodoPago() {
-        return metodoPago;
+    public List<LineaVenta> getLineas() {
+        return Collections.unmodifiableList(lineas);
     }
 
-    public double getMontoPagado() {
-        return montoPagado;
+    // ============================================================
+    // TOTALES
+    public double getSubtotal() {
+        double suma = 0;
+        for (LineaVenta lv : lineas) suma += lv.getSubtotal();
+        return suma;
     }
 
-    //SETTERS
+    public double getTotal() {
+        return getSubtotal() * (1 - descuento);
+    }
 
+    public double getCambio() {
+        return Math.max(0, montoPagado - getTotal());
+    }
+
+    // =========================================================
+    // GETTERS
+    public int getIdVenta() { return idVenta; }
+    public LocalDate getFecha() { return fecha; }
+    public double getDescuento() { return descuento; }
+    public Metodopago getMetodoPago() { return metodoPago; }
+    public double getMontoPagado() { return montoPagado; }
+    public boolean isPagada() { return pagada; }
+
+    // =========================================================
+    // SETTERS
     public void setIdVenta(int idVenta) {
-        if (!Regexp.numerosValidos(idVenta)){
+        if (!Regexp.numerosValidos(idVenta)) {
             throw new IllegalArgumentException("Ingrese un ID válido");
         }
         this.idVenta = idVenta;
     }
 
     public void setFecha(LocalDate fecha) {
-        String fechaStr = fecha.toString();
-        if (!Regexp.fechaValida(fechaStr)){
+        if (fecha == null || !Regexp.fechaValida(fecha.toString())) {
             throw new IllegalArgumentException("Fecha inválida");
         }
         this.fecha = fecha;
     }
 
     public void setDescuento(double descuento) {
-
         this.descuento = Regexp.descuentoV(descuento);
     }
 
     public void setMetodoPago(Metodopago metodoPago) {
+        if (metodoPago == null) {
+            throw new IllegalArgumentException("Método de pago requerido");
+        }
         this.metodoPago = metodoPago;
     }
 
     public void setMontoPagado(double montoPagado) {
+        if (montoPagado < 0) {
+            throw new IllegalArgumentException("Monto pagado inválido");
+        }
         this.montoPagado = montoPagado;
     }
 
     public void setPagada(boolean pagada) {
-        if (montoPagado>=producto.calcularPrecioFinal()){
-            pagada=true;
+        if (pagada && montoPagado < getTotal()) {
+            throw new IllegalArgumentException(
+                    "El monto pagado (" + montoPagado + ") no cubre el total (" + getTotal() + ")");
         }
-        this.pagada=pagada;
+        this.pagada = pagada;
     }
 
-    public boolean isPagada() {
-        return pagada;
+    @Override
+    public String toString() {
+        return "Venta #" + idVenta + " | " + fecha +
+                " | Total: $" + String.format("%.2f", getTotal()) +
+                " | " + (pagada ? "PAGADA" : "PENDIENTE");
     }
 }
-
