@@ -41,4 +41,13 @@ public class LineaVenta {
     public double getSubtotal() {
         return precioUnitario * cantidad;
     }
+
+    //=============================================================================
+    //SUMA UNIDADES CUANDO EL MISMO PRODUCTO SE AGREGA OTRA VEZ
+    public void aumentarCantidad(int extra) {
+        if (extra <= 0) {
+            throw new IllegalArgumentException("La cantidad debe ser mayor que 0");
+        }
+        this.cantidad = this.cantidad + extra;
+    }
 }

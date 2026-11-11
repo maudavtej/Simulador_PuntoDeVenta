@@ -32,5 +32,14 @@ public class Regexp {
         return nombreP.trim().matches(regex);
     }
 
+    //=============================================================================
+    //VALIDA QUE EL DESCUENTO SEA UNA FRACCIÓN ENTRE 0 Y 1 (0.2 = 20%)
+    public static double descuentoV(double descuento){
+        if (descuento < 0 || descuento > 1) {
+            throw new IllegalArgumentException("Descuento inválido (debe ser entre 0 y 1)");
+        }
+        return descuento;
+    }
+
 
 }

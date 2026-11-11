@@ -19,9 +19,11 @@ public class Venta {
     //=============================================================================
     //CONSTRUCTOR: LA VENTA NACE VACÍA Y SIN PAGAR
     public Venta(int idVenta, String nombreCliente) {
+
         if (nombreCliente == null || nombreCliente.trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre del cliente no puede estar vacío");
         }
+
         this.idVenta = idVenta;
         this.nombreCliente = nombreCliente;
         this.fecha = LocalDateTime.now();
@@ -78,8 +80,22 @@ public class Venta {
         if (pagada) {
             throw new IllegalStateException("La venta ya fue hecha");
         }
+        if (producto == null) {
+            throw new IllegalArgumentException("El producto no puede ser nulo");
+        }
         if (cantidad <= 0) {
             throw new IllegalArgumentException("La cantidad debe ser mayor que 0");
+        }
+
+        //SI EL PRODUCTO YA ESTÁ EN EL CARRITO, SE SUMA LA CANTIDAD A SU LÍNEA
+        for (LineaVenta linea : lineas) {
+            if (linea.getProducto().getCodigo().equals(producto.getCodigo())) {
+                if (linea.getCantidad() + cantidad > producto.getStock()) {
+                    throw new IllegalArgumentException("Stock insuficiente");
+                }
+                linea.aumentarCantidad(cantidad);
+                return;
+            }
         }
         if (cantidad > producto.getStock()) {
             throw new IllegalArgumentException("Stock insuficiente");

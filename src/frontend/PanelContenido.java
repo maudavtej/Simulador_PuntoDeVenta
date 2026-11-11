@@ -98,6 +98,14 @@ public class PanelContenido extends JPanel {
                     p.getStock()
     });
         }
+
+    }
+
+    //=============================================================================
+    //ACTUALIZA LOS TOTALES DEL ENCABEZADO
+    public void actualizarTotales(double totalVendido) {
+        lbTotalProductos.setText("PRODUCTOS: " + inventario.getTotalProductos());
+        lbTotalVentas.setText(String.format("VENTA TOTAL: $%.2f", totalVendido));
     }
     //==================================================================
     //GETTERS

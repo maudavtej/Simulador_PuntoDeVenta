@@ -22,7 +22,7 @@ public class ProductoFisico extends Producto {
 
     @Override
     public double calcularPrecioFinal(){
-        return (precioBase*IVA)-descuento;
+        return precioBase * IVA * (1 - getDescuento());
     }
 
 }
