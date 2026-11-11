@@ -1,8 +1,5 @@
 package backend;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
-
 public class Regexp {
     //=============================================================================
     //VALIDAMOS QUE EL CÓDIGO SEAN SOLO NÚMEROS
@@ -16,7 +13,7 @@ public class Regexp {
 
     //================================================================================
     //VALIDACIÓN DE CANTIDADES
-    public static boolean precioValido(String precioBase){
+    public static boolean isNumber(String precioBase){
         if (precioBase==null||precioBase.trim().isEmpty())return false;
         try {
             float precioB =Float.parseFloat(precioBase.trim());
@@ -24,40 +21,22 @@ public class Regexp {
         }catch (NumberFormatException e){
             return false;
         }
+
     }
 
     //==================================================================================
     //VALIDA NOMBRE DE PRODUCTO
     public static boolean validaNombres(String nombreP){
         if (nombreP==null||nombreP.trim().isEmpty())return false;
-        String regex = "^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9 .,\\ -]+$";
+        String regex = "^[A-Za-zÁÉÍÓÚáéíóúñÑ\\s]+$";
         return nombreP.trim().matches(regex);
     }
 
-    //VALIDA NUMEROS
-
-    public static boolean numerosValidos(int id){
-        String idStr = Integer.toString(id);
-        if (idStr==null||idStr.trim().isEmpty())return false;
-        String regexp = "^[0-9]{5}$";
-        return idStr.matches(regexp);
-    }
-    //VALIDA FECHA
-
-    public static boolean fechaValida(String fecha) {
-        if (fecha == null) return false;
-        try {
-            LocalDate.parse(fecha.trim());
-            return true;
-        } catch (DateTimeException e) {
-            return false;
-        }
-    }
-    //DESCUENTO
-
+    //=============================================================================
+    //VALIDA QUE EL DESCUENTO SEA UNA FRACCIÓN ENTRE 0 Y 1 (0.2 = 20%)
     public static double descuentoV(double descuento){
-        if (descuento<0||descuento>1){
-            throw new IllegalArgumentException("Descuento inválido");
+        if (descuento < 0 || descuento > 1) {
+            throw new IllegalArgumentException("Descuento inválido (debe ser entre 0 y 1)");
         }
         return descuento;
     }
