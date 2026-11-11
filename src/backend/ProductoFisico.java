@@ -6,8 +6,8 @@ public class ProductoFisico extends Producto {
     private double peso=0;
     //============================================
     //CONSTRUCTOR
-    public ProductoFisico(String codigo, String nombre, float precioBase, int stock,double peso){
-        super(codigo,nombre,precioBase,stock);
+    public ProductoFisico(String codigo, String nombre, float precioBase, int stock,double peso, double descuento){
+        super(codigo,nombre,precioBase,stock, descuento);
         setPeso(peso);
     }
     //=============================================
@@ -22,7 +22,7 @@ public class ProductoFisico extends Producto {
 
     @Override
     public double calcularPrecioFinal(){
-        return precioBase*IVA;
+        return (precioBase*IVA)-descuento;
     }
 
 }

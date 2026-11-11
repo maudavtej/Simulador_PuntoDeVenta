@@ -25,14 +25,12 @@ public class Regexp {
     }
 
     //==================================================================================
-    // VALIDA NOMBRE DE PRODUCTO
-    // CAMBIO: ahora acepta números, puntos y guiones ("Mouse USB 3.0" y asi)
-    public static boolean validaNombres(String nombreP) {
-        if (nombreP == null || nombreP.trim().isEmpty()) return false;
-        String regex = "^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\\s.\\-]+$";
+    //VALIDA NOMBRE DE PRODUCTO
+    public static boolean validaNombres(String nombreP){
+        if (nombreP==null||nombreP.trim().isEmpty())return false;
+        String regex = "^[A-Za-zÁÉÍÓÚáéíóúñÑ\\s]+$";
         return nombreP.trim().matches(regex);
     }
-
 
 
 }

@@ -6,13 +6,14 @@ public abstract class Producto {
     protected String nombre;
     protected float precioBase;
     protected int stock;
+    protected double descuento;
 
-    private Producto(){}
-    public Producto(String codigo,String nombre, float precioBase, int stock){
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.precioBase = precioBase;
-        this.stock = stock;
+    public Producto(String codigo,String nombre, float precioBase, int stock, double descuento){
+        setCodigo(codigo);
+        setNombre(nombre);
+        setPrecioBase(precioBase);
+        setStock(stock);
+        setDescuento(descuento);
     }
 
     public String getCodigo() {
@@ -22,7 +23,7 @@ public abstract class Producto {
     public void setCodigo(String codigo) {
         if (!Regexp.isCodigo(codigo)){throw new IllegalArgumentException("Código inválido");
         }
-        this.codigo = codigo;
+        this.codigo = codigo.trim();
     }
 
     public String getNombre() {
@@ -30,27 +31,36 @@ public abstract class Producto {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if (!Regexp.validaNombres(nombre)){throw new IllegalArgumentException("Nombre de producto inválido");}
+        this.nombre=nombre.trim();
     }
 
     public float getPrecioBase() {
-        if (precioBase<=0){
-            throw new IllegalArgumentException("Ingrese un precio base válido");
-        }
-        return this.precioBase=precioBase;
+        return precioBase;
     }
 
     public void setPrecioBase(float precioBase) {
-        this.precioBase = precioBase;
-    }
 
+        if (precioBase <= 0 || !Float.isFinite(precioBase)) {
+            throw new IllegalArgumentException("Precio inválido");
+        }
+        this.precioBase=precioBase;
+    }
     public int getStock() {
         return stock;
     }
 
     public void setStock(int stock) {
+        if (stock<0||stock>3000){
+            throw new IllegalArgumentException("Stock inválido");
+        }
         this.stock = stock;
     }
+
+    public void setDescuento(double descuento){
+        this.descuento=Regexp.descuentoV(descuento);
+    }
+    public double getDescuento(){return descuento;}
 
     public abstract double calcularPrecioFinal();
 }
