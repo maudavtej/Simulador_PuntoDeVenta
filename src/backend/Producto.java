@@ -63,6 +63,12 @@ public abstract class Producto {
         stock-=cant;
     }
 
+    public void aumentarStock(int cant) {
+        if (cant <= 0) throw new IllegalArgumentException("cantidad invalida");
+        if (stock + cant > 3000) throw new IllegalStateException("Se excede el stock maximo");
+        stock += cant;
+    }
+
     public void setDescuento(double descuento){
         this.descuento=Regexp.descuentoV(descuento);
     }
