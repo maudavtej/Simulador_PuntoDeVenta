@@ -57,6 +57,12 @@ public abstract class Producto {
         this.stock = stock;
     }
 
+    public void reducirStock(int cant){
+        if(cant <= 0) throw new IllegalArgumentException("Cantidad invalida");
+        if(cant > stock) throw new IllegalStateException("Stock insuficiente para: "+ nombre);
+        stock-=cant;
+    }
+
     public void setDescuento(double descuento){
         this.descuento=Regexp.descuentoV(descuento);
     }
